@@ -13,6 +13,19 @@
   color-scheme: dark;
 }
 
+/* Prevent horizontal scroll */
+body {
+  overflow-x: hidden;
+  width: 100vw;
+  max-width: 100%;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
 .hash-span {
   margin-top: -100px;
   padding-bottom: 100px;

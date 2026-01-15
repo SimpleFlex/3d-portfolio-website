@@ -26,11 +26,12 @@ import {
   user1,
   user2,
   user3,
-  youtube,
   linkedin,
   twitter,
   github,
 } from "../assets";
+
+import telegram from "../assets/socials/telegram.png"; // Added import for telegram
 
 // Navbar Links
 export const NAV_LINKS = [
@@ -64,15 +65,15 @@ export const NAV_LINKS = [
 // Services
 export const SERVICES = [
   {
-    title: "Web Developer",
+    title: "Full-Stack Web Developer",
     icon: web,
   },
   {
-    title: "React Native Developer",
+    title: "React Developer",
     icon: mobile,
   },
   {
-    title: "Backend Developer",
+    title: "Mern Backend Developer",
     icon: backend,
   },
   {
@@ -185,7 +186,7 @@ export const EXPERIENCES = [
 export const TESTIMONIALS = [
   {
     testimonial:
-      "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
+      "I thought it was impossible to make a website as beautiful as our product, but Primp proved me wrong.",
     name: "Sara Lee",
     designation: "CFO",
     company: "Acme Co",
@@ -193,7 +194,7 @@ export const TESTIMONIALS = [
   },
   {
     testimonial:
-      "I've never met a web developer who truly cares about their clients' success like Rick does.",
+      "I've never met a web developer who truly cares about their clients' success like primo does.",
     name: "Chris Brown",
     designation: "COO",
     company: "DEF Corp",
@@ -201,7 +202,7 @@ export const TESTIMONIALS = [
   },
   {
     testimonial:
-      "After Rick optimized our website, our traffic increased by 50%. We can't thank them enough!",
+      "After Primo optimized our website, our traffic increased by 50%. We can't thank them enough!",
     name: "Lisa Wang",
     designation: "CTO",
     company: "456 Enterprises",
@@ -230,7 +231,7 @@ export const PROJECTS = [
       },
     ],
     image: project1,
-    source_code_link: "https://github.com/sanidhyy/disney-clone",
+    source_code_link: "https://github.com/SimpleFlex/",
     live_site_link: "https://clonedisneyplus.web.app/",
   },
   {
@@ -252,13 +253,13 @@ export const PROJECTS = [
       },
     ],
     image: project2,
-    source_code_link: "https://github.com/sanidhyy/fitness-app",
+    source_code_link: "https://github.com/SimpleFlex/",
     live_site_link: "https://fitness-gym-react.netlify.app/",
   },
   {
-    name: "Shoppy",
+    name: "scrolly solana game",
     description:
-      "The most personalised admin dashboard web application that allows enables users to choose customized themes and dark mode with different pages and variety of charts.",
+      "this si a solana game built for a bounty, i built this on solana bockchain",
     tags: [
       {
         name: "react",
@@ -274,7 +275,7 @@ export const PROJECTS = [
       },
     ],
     image: project3,
-    source_code_link: "https://github.com/sanidhyy/admin-dashboard",
+    source_code_link: "https://github.com/SimpleFlex/",
     live_site_link: "https://shoppy-dashboard-react.netlify.app/",
   },
   {
@@ -296,8 +297,8 @@ export const PROJECTS = [
       },
     ],
     image: project4,
-    source_code_link: "https://github.com/sanidhyy/tiktok-clone",
-    live_site_link: "https://tiktok-clone-react.vercel.app/",
+    source_code_link: "https://github.com/SimpleFlex/Scrolly-game",
+    live_site_link: "https://scrolly-game-lac.vercel.app/",
   },
   {
     name: "Cryptoverse",
@@ -318,7 +319,7 @@ export const PROJECTS = [
       },
     ],
     image: project5,
-    source_code_link: "https://github.com/sanidhyy/crypto-app",
+    source_code_link: "https://github.com/SimpleFlex/",
     live_site_link: "https://reactjscryptoapp.netlify.app/",
   },
   {
@@ -340,30 +341,30 @@ export const PROJECTS = [
       },
     ],
     image: project6,
-    source_code_link: "https://github.com/sanidhyy/travel-advisor",
+    source_code_link: "https://github.com/SimpleFlex/",
     live_site_link: "https://travel-advisor-reactjs.netlify.app/",
   },
 ] as const;
 
 export const SOCIALS = [
   {
-    name: "YouTube",
-    icon: youtube,
-    link: "https://www.youtube.com/@OPGAMER.",
+    name: "Telegram",
+    icon: telegram,
+    link: "https://t.me/primo_Mind",
   },
   {
     name: "Linkedin",
     icon: linkedin,
-    link: "https://www.linkedin.com/in/sanidhyy",
+    link: "",
   },
   {
     name: "Twitter",
     icon: twitter,
-    link: "https://twitter.com/TechnicalShubam",
+    link: "https://x.com/primo_Mind",
   },
   {
     name: "GitHub",
     icon: github,
-    link: "https://github.com/sanidhyy",
+    link: "hhttps://github.com/SimpleFlex/",
   },
 ] as const;

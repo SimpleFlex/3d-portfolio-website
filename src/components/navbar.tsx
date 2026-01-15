@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import { logo, menu, close } from "../assets";
 import { NAV_LINKS } from "../constants";
-import { styles } from "../styles";
 import { cn } from "../utils/lib";
 
 type NavbarProps = {
@@ -12,11 +11,11 @@ type NavbarProps = {
 
 // Navbar
 export const Navbar = ({ hide }: NavbarProps) => {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Optimized scroll handler
+  // Optimized scroll handler with active section detection
   useEffect(() => {
     let ticking = false;
 
@@ -26,21 +25,32 @@ export const Navbar = ({ hide }: NavbarProps) => {
           const scrollPos = window.scrollY;
           setIsScrolled(scrollPos > 10);
 
+          // If at top of page, set Home as active
           if (scrollPos < 100) {
-            setActive("");
+            setActive("Home");
           } else {
-            const offset = scrollPos + 200;
+            // Find which section is currently in view
+            let currentSection = "Home";
+
             for (const link of NAV_LINKS) {
               const section = document.getElementById(link.id);
               if (section) {
-                const top = section.offsetTop;
-                const bottom = top + section.offsetHeight;
-                if (offset >= top && offset < bottom) {
-                  setActive(link.title);
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top + window.scrollY;
+                const sectionHeight = rect.height;
+
+                // Check if we're in this section (with offset for navbar height)
+                if (
+                  scrollPos >= sectionTop - 200 &&
+                  scrollPos < sectionTop + sectionHeight - 200
+                ) {
+                  currentSection = link.title;
                   break;
                 }
               }
             }
+
+            setActive(currentSection);
           }
 
           ticking = false;
@@ -49,12 +59,15 @@ export const Navbar = ({ hide }: NavbarProps) => {
       }
     };
 
+    // Initial check
+    handleScroll();
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLogoClick = useCallback(() => {
-    setActive("");
+    setActive("Home");
     setToggle(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -73,6 +86,10 @@ export const Navbar = ({ hide }: NavbarProps) => {
     },
     []
   );
+
+  const handleDesktopLinkClick = useCallback((linkTitle: string) => {
+    setActive(linkTitle);
+  }, []);
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -94,14 +111,22 @@ export const Navbar = ({ hide }: NavbarProps) => {
   return (
     <nav
       className={cn(
-        styles.paddingX,
-        "w-full flex items-center py-4 fixed top-0 z-50 transition-all duration-300",
+        "w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        // Vertical padding
+        "py-4",
+        // Responsive margins and background
         isScrolled || hide
           ? "mt-0 bg-primary/95 backdrop-blur-sm shadow-lg"
           : "mt-0 sm:mt-20 bg-primary"
       )}
     >
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
+      <div
+        className={cn(
+          // Horizontal padding - HARDCODED
+          "px-6 sm:px-16",
+          "w-full flex justify-between items-center max-w-7xl mx-auto"
+        )}
+      >
         {/* Logo */}
         <Link
           to="/"
@@ -124,7 +149,7 @@ export const Navbar = ({ hide }: NavbarProps) => {
             <li
               key={link.id}
               className="relative cursor-pointer text-[18px] font-medium transition-all"
-              onClick={() => !link.link && setActive(link.title)}
+              onClick={() => !link.link && handleDesktopLinkClick(link.title)}
             >
               {link.link ? (
                 <a
@@ -151,7 +176,7 @@ export const Navbar = ({ hide }: NavbarProps) => {
               )}
               {/* Active indicator line */}
               {active === link.title && (
-                <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-gradient-to-r from-[#915eff] to-[#7a4aff] rounded-full"></span>
+                <span className="absolute -bottom-1 left-0 w-full h-[3px] bg-gradient-to-r from-[#915eff] to-[#7a4aff] rounded-full animate-[slideIn_0.3s_ease-out]"></span>
               )}
             </li>
           ))}
@@ -161,7 +186,7 @@ export const Navbar = ({ hide }: NavbarProps) => {
         <div className="sm:hidden flex flex-1 justify-end items-center">
           <button
             onClick={handleMobileMenuToggle}
-            className="w-[28px] h-[28px] flex items-center justify-center cursor-pointer"
+            className="w-[28px] h-[28px] flex items-center justify-center cursor-pointer z-50"
             aria-label="Toggle menu"
           >
             <img
@@ -174,7 +199,7 @@ export const Navbar = ({ hide }: NavbarProps) => {
           {/* Mobile Menu Dropdown */}
           <div
             className={cn(
-              "absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl transition-all duration-300",
+              "absolute top-20 right-6 my-2 min-w-[140px] z-10 rounded-xl transition-all duration-300",
               toggle
                 ? "opacity-100 scale-100 pointer-events-auto"
                 : "opacity-0 scale-95 pointer-events-none"
@@ -228,6 +253,17 @@ export const Navbar = ({ hide }: NavbarProps) => {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes slideIn {
+          from {
+            width: 0;
+          }
+          to {
+            width: 100%;
+          }
+        }
+      `}</style>
     </nav>
   );
 };

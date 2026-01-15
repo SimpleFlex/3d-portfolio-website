@@ -11,7 +11,7 @@ export const Hero = () => {
   const elijahRef = useRef<HTMLSpanElement>(null);
   const primoRef = useRef<HTMLSpanElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<HTMLAnchorElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const diamondRef = useRef<HTMLDivElement>(null);
 
@@ -79,9 +79,9 @@ export const Hero = () => {
       </div>
 
       {/* Main Hero Content */}
-      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-0 sm:h-screen flex items-center">
-        <div className="flex flex-col md:flex-row items-center justify-between w-full gap-8 md:gap-12">
-          {/* Left Text */}
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 md:pt-28 lg:pt-32 sm:h-screen flex items-center">
+        <div className="flex flex-col-reverse md:flex-row items-center justify-between w-full gap-8 md:gap-12">
+          {/* Left Text - Appears SECOND on mobile (below image) */}
           <div className="w-full md:w-1/2 lg:w-3/5 z-20 text-center md:text-left">
             <h1 className="font-fancy text-white font-extrabold leading-tight">
               <span
@@ -123,16 +123,17 @@ export const Hero = () => {
               with precision and purpose.
             </p>
 
-            <button
+            <a
+              href="#contact"
               ref={buttonRef}
-              className="mt-8 px-8 sm:px-12 py-3 sm:py-4 text-[16px] sm:text-[18px] md:text-[20px] font-bold tracking-wide bg-gradient-to-r from-[#915eff] to-[#7a4aff] text-white rounded-2xl shadow-xl shadow-[#915eff]/40 hover:scale-105 hover:shadow-[#915eff]/60 transition-all duration-300 relative z-30"
+              className="mt-8 px-8 sm:px-12 py-3 sm:py-4 text-[16px] sm:text-[18px] md:text-[20px] font-bold tracking-wide bg-gradient-to-r from-[#915eff] to-[#7a4aff] text-white rounded-2xl shadow-xl shadow-[#915eff]/40 hover:scale-105 hover:shadow-[#915eff]/60 transition-all duration-300 relative z-30 inline-block"
             >
               HIRE ME
-            </button>
+            </a>
           </div>
 
-          {/* Right-side Hero Image */}
-          <div className="relative w-full md:w-1/2 lg:w-2/5 flex justify-center md:justify-end items-center z-10 mt-8 md:mt-0">
+          {/* Right-side Hero Image - Appears FIRST on mobile (at top) */}
+          <div className="relative w-full md:w-1/2 lg:w-2/5 flex justify-center md:justify-end items-center z-10">
             {/* Radiating Halo Behind Image */}
             <div className="absolute top-1/2 -translate-y-1/2 left-1/2 md:left-auto -translate-x-1/2 md:translate-x-0 md:right-0 w-[300px] sm:w-[400px] md:w-[450px] lg:w-[500px] aspect-square rounded-full bg-gradient-to-tr from-purple-500 via-pink-500 to-indigo-400 opacity-20 blur-3xl animate-pulse-slow z-0"></div>
 

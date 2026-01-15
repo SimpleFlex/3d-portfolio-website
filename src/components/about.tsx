@@ -1,15 +1,10 @@
-import { useEffect, useRef } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { SERVICES } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
 import { fadeIn, textVariant } from "../utils/motion";
-
-gsap.registerPlugin(ScrollTrigger);
 
 type ServiceCardProps = {
   index: number;
@@ -54,28 +49,9 @@ const ServiceCard = ({ index, title, icon }: ServiceCardProps) => {
 
 // About
 export const About = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.to(sectionRef.current, {
-        opacity: 0,
-        y: -50,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
-    });
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <SectionWrapper idName="about">
-      <div ref={sectionRef}>
+      <div>
         {/* Title */}
         <div className="flex flex-col items-center text-center">
           <motion.div variants={textVariant()}>
@@ -97,7 +73,7 @@ export const About = () => {
             clients to deliver efficient, scalable, and user-centric solutions
             that address real-world challenges. From concept to deployment, I
             focus on clean architecture, performance, and long-term
-            maintainability. Let’s work together to transform your ideas into
+            maintainability. Let's work together to transform your ideas into
             reliable, production-ready products.
           </motion.p>
         </div>
